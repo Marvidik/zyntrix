@@ -395,6 +395,7 @@ def create_user_investment(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def list_active_investments(request):
+    process_matured_investments() 
     user = request.user
     investments = UserInvestment.objects.filter(
         user=user,
