@@ -1,0 +1,8 @@
+/venv
+.env
+/media
+/deposit-prove
+/admin-interface
+db.sqlite3
+
+
