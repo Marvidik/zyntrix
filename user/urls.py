@@ -17,4 +17,5 @@ urlpatterns = [
     path('investments/create', create_user_investment, name='create-user-investment'),
     path('investments/active', list_active_investments, name='list-active-investments'),
     path('kyc/submit', submit_kyc, name='submit-kyc'),
+    path('investment/<int:investment_id>/toggle-auto-reinvest', toggle_auto_reinvest, name='toggle-auto-reinvest'),
 ]

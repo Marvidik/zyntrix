@@ -422,3 +422,21 @@ def submit_kyc(request):
         serializer.save(user=user)
         return Response({"detail": "KYC submitted successfully."}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def toggle_auto_reinvest(request, investment_id):
+    user = request.user
+
+    try:
+        investment = UserInvestment.objects.get(id=investment_id, user=user)
+    except UserInvestment.DoesNotExist:
+        return Response({"detail": "Investment not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    investment.auto_reinvest = not investment.auto_reinvest
+    investment.save()
+
+    return Response({
+        "detail": f"Auto reinvest set to {investment.auto_reinvest} for this investment."
+    }, status=status.HTTP_200_OK)
