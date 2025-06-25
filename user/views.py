@@ -14,7 +14,6 @@ from .decorators import kyc_required
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-@kyc_required
 def get_account_info(request):
     update_user_account(request.user)
     process_matured_investments()  
@@ -204,6 +203,7 @@ def create_or_update_other_settings(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@kyc_required
 def transfer_funds(request):
     sender = request.user
     recipient_identifier = request.data.get('recipient')  # email or username
@@ -287,6 +287,7 @@ def get_user_withdrawals(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@kyc_required
 def create_withdrawal(request):
     user = request.user
     amount = request.data.get('amount')
@@ -337,6 +338,7 @@ def create_withdrawal(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@kyc_required
 def create_user_investment(request):
     user = request.user
     serializer = UserInvestmentSerializer(data=request.data)

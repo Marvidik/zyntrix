@@ -69,7 +69,17 @@ class KYCVerification(models.Model):
     is_approved = models.BooleanField(default=False)
     submitted_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
 
+        # Update related user profile
+        try:
+            profile, _ = UserProfile.objects.get_or_create(user=self.user)
+            profile.kyc = self.is_approved
+            profile.save()
+        except Exception as e:
+            print(f"Error updating UserProfile KYC flag: {e}")
+            
     def __str__(self):
         return f"KYC for {self.user.username}"
 
