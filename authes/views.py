@@ -128,7 +128,12 @@ def login_user(request):
         'email': user.email,
         'full_name':userprofile.full_name,
         'status':userprofile.status,
-        'kyc':userprofile.kyc 
+        'kyc':userprofile.kyc,
+        'phone':userprofile.full_name,
+        'country':userprofile.country,
+        'account_type':userprofile.account_type,
+        'dob':userprofile.dob
+
     })
 
 
