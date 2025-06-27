@@ -19,6 +19,12 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+admin.site.site_header = "Parkland Admin"
+admin.site.site_title = "Parkland Admin"
+admin.site.index_title = "Welcome to Parkland"
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authes.urls')),

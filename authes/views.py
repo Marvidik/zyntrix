@@ -129,10 +129,11 @@ def login_user(request):
         'full_name':userprofile.full_name,
         'status':userprofile.status,
         'kyc':userprofile.kyc,
-        'phone':userprofile.full_name,
+        'phone':userprofile.phone,
         'country':userprofile.country,
         'account_type':userprofile.account_type,
-        'dob':userprofile.dob
+        'dob':userprofile.dob,
+        'address':userprofile.address 
 
     })
 
