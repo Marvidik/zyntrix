@@ -14,6 +14,11 @@ class OtherSettingsSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['user']
 
+class OtherSettingsSerializerr(serializers.ModelSerializer):
+    class Meta:
+        model = OtherSettings
+        fields = ['send_otp_on_withdrawal', 'notify_on_profit', 'notify_on_plan_expiry']
+
 
 class DepositSerializer(serializers.ModelSerializer):
     class Meta:

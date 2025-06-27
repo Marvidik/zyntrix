@@ -10,6 +10,7 @@ urlpatterns = [
     path('profile/withdrawal/create',create_or_update_withdrawal_info,name="create-withdrawal"),
     path('profile/withdrawal/list',get_withdrawal_info,name="list-withdrawal"),
     path('settings/notifications', create_or_update_other_settings, name='create_or_update_other_settings'),
+    path('other-settings', get_user_other_settings, name='user-other-settings'),
     path('transfer', transfer_funds, name='transfer_funds'),
     path('deposits/', get_user_deposits, name='get_user_deposits'),
     path('withdrawals/', get_user_withdrawals, name='get_user_withdrawals'),

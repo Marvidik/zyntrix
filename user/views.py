@@ -200,6 +200,16 @@ def create_or_update_other_settings(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_user_other_settings(request):
+    try:
+        settings = OtherSettings.objects.get(user=request.user)
+        serializer = OtherSettingsSerializer(settings)
+        return Response(serializer.data)
+    except OtherSettings.DoesNotExist:
+        return Response({"detail": "Settings not found."}, status=status.HTTP_404_NOT_FOUND)
+    
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
