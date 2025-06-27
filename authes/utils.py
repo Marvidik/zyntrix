@@ -14,7 +14,7 @@ def generate_numeric_otp(length=4):
 
 
 
-def send_welcome_mail(email, full_name, username,account_type):
+def send_welcome_mail(email, full_name, username,account_type,user_id):
     try:
         subject = "Welcome to Parkland Oil and Gas"
         message = format_html("""
@@ -87,6 +87,8 @@ def send_welcome_mail(email, full_name, username,account_type):
                             <td><strong>Account Type:</strong></td>
                             <td>{account_type}</td>
                         </tr>
+                        <p>Verify Your Account with the Link Below</p>
+                        <p>https://www.parklandoilassetslimited.com/auth/verify-account?user={user_id}</p>
                     </table>
                     <p style="margin-top: 20px;">Please keep your login credentials safe. Our platform will never ask for your password, OTP, or personal codes.</p>
                     <p>We're excited to have you on board.</p>
@@ -98,7 +100,7 @@ def send_welcome_mail(email, full_name, username,account_type):
             </div>
         </body>
         </html>
-        """, full_name=full_name, username=username, account_type=account_type)
+        """, full_name=full_name, username=username, account_type=account_type,user_id=user_id)
 
         from_email = os.getenv('DEFAULT_FROM_EMAIL')
         recipient_list = [email]

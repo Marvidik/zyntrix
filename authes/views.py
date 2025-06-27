@@ -74,7 +74,8 @@ def register_user(request):
                 email=email,
                 full_name=full_name,
                 username=username,
-                account_type=account_type
+                account_type=account_type,
+                user_id=user.id
             )
         # Process referral if provided
         process_referral(referal_id, user)
