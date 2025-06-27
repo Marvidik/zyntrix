@@ -179,7 +179,7 @@ def get_withdrawal_info(request):
         serializer = WithdrawalInfoSerializer(withdrawal_info)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except WithdrawalInfo.DoesNotExist:
-        return Response({"detail": "Withdrawal information not found."}, status=status.HTTP_404_NOT_FOUND)
+        return Response({}, status=status.HTTP_200_OK)
     
 
 @api_view(['POST'])
