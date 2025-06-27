@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import UserProfile, Deposit, Bonus, ReferalBonus, Withdrawal, UserInvestment, UserAccount, ReferalList,Profit,Penalty,KYCVerification
+from .models import UserProfile, Deposit, Bonus, ReferalBonus, Withdrawal, UserInvestment, UserAccount, ReferalList,Profit,Penalty,KYCVerification,Otp
 
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
@@ -99,3 +99,11 @@ class KYCAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'first_name', 'last_name', 'email', 'phone_number')
     list_filter = ('is_approved', 'nationality', 'submitted_at')
     readonly_fields = ('submitted_at',)
+
+
+@admin.register(Otp)
+class OtpAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'otp'
+    )
