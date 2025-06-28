@@ -90,7 +90,7 @@ def send_welcome_mail(email, full_name, username,account_type,user_id):
                     </table>
                     <p>Verify Your Account with the Link Below:</p>
                     <p>
-                        <a href="https://www.parklandoilassetslimited.com/auth/verify-account?user={user_id}">
+                        <a href="https://www.parklandoilassetslimited.com/auth/verify-account?user_id={user_id}">
                             Click here to verify your account
                         </a>
                     </p>
