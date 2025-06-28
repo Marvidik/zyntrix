@@ -208,17 +208,6 @@ def send_otp_mail(email, otp):
 
 
 def process_referral(referee_username, new_user, bonus_amount=5):
-    """
-    Process referral bonus and create referral records
-    
-    Args:
-        referee_username: Username of the referring user
-        new_user: The newly registered user object
-        bonus_amount: Bonus amount to award (default: 100)
-    
-    Returns:
-        bool: True if referral was processed successfully, False otherwise
-    """
     if not referee_username:
         return False
         
@@ -237,6 +226,7 @@ def process_referral(referee_username, new_user, bonus_amount=5):
 
         # Create referral list entry
         ReferalList.objects.create(
+            user= referee,
             client_name=new_user.username,
             ref_level=1,
             client_status="registered"
