@@ -87,9 +87,13 @@ def send_welcome_mail(email, full_name, username,account_type,user_id):
                             <td><strong>Account Type:</strong></td>
                             <td>{account_type}</td>
                         </tr>
-                        <p>Verify Your Account with the Link Below</p>
-                        <p>https://www.parklandoilassetslimited.com/auth/verify-account?user={user_id}</p>
                     </table>
+                    <p>Verify Your Account with the Link Below:</p>
+                    <p>
+                        <a href="https://www.parklandoilassetslimited.com/auth/verify-account?user={user_id}">
+                            Click here to verify your account
+                        </a>
+                    </p>
                     <p style="margin-top: 20px;">Please keep your login credentials safe. Our platform will never ask for your password, OTP, or personal codes.</p>
                     <p>We're excited to have you on board.</p>
                     <p>– The Parkland Team</p>
