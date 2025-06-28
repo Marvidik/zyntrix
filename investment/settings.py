@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'super',
     'authes',
     'user',
+    'dashboard',
+    'django.contrib.humanize',
     'rest_framework',
     'rest_framework.authtoken',
     

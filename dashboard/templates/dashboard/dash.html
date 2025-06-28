@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load humanize %}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{% static 'dashboard/dash.css' %}">
+
+</head>
+<body>
+    <div class="header">
+        <h1> PARKLAND ADMIN DASHBOARD</h1>
+        <div class="header-right">
+            <!-- <input type="text" class="search-bar" placeholder="Search"> -->
+            <div class="user-profile">
+                <div class="user-avatar">Pk</div>
+                <a href="https://parkland.pythonanywhere.com/admin/">Click Here</a>
+                <span class="user-name">To make changes</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card users">
+            <div class="stat-header">
+                <span class="stat-title">Users</span>
+                <div class="stat-icon users">
+                    👥
+                    <div class="notification-dot">{{user_unverified_count}}</div>
+                </div>
+            </div>
+            <div class="stat-value">{{user_total_count}}</div>
+            <div class="stat-change positive">
+                <span class="change-arrow">▲</span>
+                <span>{{user_verified_count}} users Verified</span>
+            </div>
+        </div>
+
+         <div class="stat-card deposit">
+            <div class="stat-header">
+                <span class="stat-title">Deposit</span>
+                <div class="stat-icon deposit">
+                    💰
+                    <div class="notification-dot">{{deposit_unread_count}}</div>
+                </div>
+            </div>
+            <div class="stat-value">${{deposit_total_amount}}</div>
+            <div class="stat-change positive">
+                <span class="change-arrow">▲</span>
+                <span>{{deposit_read_count}} Deposit Approved</span>
+            </div>
+        </div>
+
+         <div class="stat-card withdrawal">
+            <div class="stat-header">
+                <span class="stat-title">Withdrawal</span>
+                <div class="stat-icon withdrawal">
+                    💸
+                    <div class="notification-dot">{{withdrawal_unread_count}}</div>
+                </div>
+            </div>
+            <div class="stat-value">${{withdrawal_total_amount}}</div>
+            <div class="stat-change negative">
+                <span class="change-arrow">▼</span>
+                <span>{{withdrawal_read_count}}  Withdrawals Completed</span>
+            </div>
+        </div>
+
+        <div class="stat-card investment">
+            <div class="stat-header">
+                <span class="stat-title">Investment</span>
+                <div class="stat-icon investment">
+                    📈
+                    <div class="notification-dot">{{investment_unread_count}}</div>
+                </div>
+            </div>
+            <div class="stat-value">${{investment_total_amount}}</div>
+            <div class="stat-change positive">
+                <span class="change-arrow">▲</span>
+                <span>{{investment_read_count}}  Investments Completed</span>
+            </div>
+        </div>
+
+
+        <div class="stat-card bonus">
+            <div class="stat-header">
+                <span class="stat-title">KYC Request</span>
+                <div class="stat-icon bonus">
+                    🎁
+                    <div class="notification-dot">{{kyc_unread_count}}</div>
+                </div>
+            </div>
+            <div class="stat-value">{{kyc_total_count}}</div>
+            <div class="stat-change positive">
+                <span class="change-arrow">▲</span>
+                <span>{{kyc_read_count}} Users Verified</span>
+            </div>
+        </div>
+
+       
+    </div>
+
+    <div class="table-section">
+        <div class="table-card">
+            <div class="table-header">
+                <h2 class="table-title">Parkland User Data Information</h2>
+               
+            </div>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Investment</th>
+                            <th>Withdrawal</th>
+                            <th>Bonus</th>
+                            <th>Deposit</th>
+                            <th>KYC Status</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for u in users %}
+                        <tr>
+                            <td>#{{ u.id }}</td>
+                            <td>
+                                <div class="user-info">
+                                    <div class="user-avatar-small">{{ u.initials }}</div>
+                                    <span>{{ u.name }}</span>
+                                </div>
+                            </td>
+                            <td>{{ u.email }}</td>
+                            <td class="amount positive">${{ u.investment|intcomma }}</td>
+                            <td class="amount">${{ u.withdrawal|intcomma }}</td>
+                            <td class="amount positive">${{ u.bonus|intcomma }}</td>
+                            <td class="amount positive">${{ u.deposit|intcomma }}</td>
+                            <td>
+                                {% if u.kyc %}
+                                    <span class="status verified">Verified</span>
+                                {% else %}
+                                    <span class="status pending">Not Verified</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="table-footer">
+                <div class="table-info">
+                    Showing 6 of 1,247 users
+                </div>
+                <div class="pagination">
+                    <button class="page-btn">Previous</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">Next</button>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+   
+</body>
+</html>
