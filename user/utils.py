@@ -22,7 +22,7 @@ def update_user_account(user):
     # Calculate profit and balance
     investment=UserInvestment.objects.filter(user=user,is_active=True,matured=False).aggregate(total=Sum('amount'))['total'] or 0
 
-    account_balance = total_deposit + total_profit + bonus - total_withdrawal - penalty - investment
+    account_balance = total_deposit + total_profit + bonus + referal_bonus - total_withdrawal - penalty - investment
 
     # Update the UserAccount
     account, created = UserAccount.objects.get_or_create(user=user)

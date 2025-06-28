@@ -105,7 +105,8 @@ def get_user_profits(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_referal_list(request):
-    referals = ReferalList.objects.all().order_by('-date_registered')
+    user = request.user  # The logged-in user
+    referals = ReferalList.objects.filter(user=user).order_by('-date_registered')
 
     data = [
         {
@@ -116,9 +117,6 @@ def get_referal_list(request):
         }
         for r in referals
     ]
-
-    return Response({'referals': data}, status=200)
-
 
 
 @api_view(['PATCH'])
