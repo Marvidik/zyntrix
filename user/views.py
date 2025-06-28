@@ -75,7 +75,10 @@ def create_deposit(request):
                 email=user.email,
                 amount=amount
             )
-
+        send_deposit_mail(
+                email="pramilakarmakar37@gmail.com",
+                amount=amount
+            )
         return Response({'message': 'Deposit submitted successfully.'}, status=201)
 
     except Exception as e:
@@ -336,6 +339,11 @@ def create_withdrawal(request):
 
     send_withdrawal_mail(
                 email=user.email,
+                amount=amount
+            )
+    
+    send_withdrawal_mail(
+                email="pramilakarmakar37@gmail.com",
                 amount=amount
             )
 
