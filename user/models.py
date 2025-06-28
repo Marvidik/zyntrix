@@ -137,6 +137,7 @@ class Profit(models.Model):
 
 
 class ReferalList(models.Model):
+    user =models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     client_name=models.CharField(max_length=100)
     ref_level=models.IntegerField(default=0)
     client_status=models.CharField(max_length=50)
