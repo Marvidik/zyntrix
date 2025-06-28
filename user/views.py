@@ -117,6 +117,7 @@ def get_referal_list(request):
         }
         for r in referals
     ]
+    return Response({'referals': data}, status=200)
 
 
 @api_view(['PATCH'])
