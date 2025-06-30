@@ -54,7 +54,7 @@ body {
 .user-avatar {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+   
     background: #ff6b6b;
     display: flex;
     align-items: center;
@@ -388,19 +388,71 @@ body {
     border-color: #667eea;
 }
 
+.update-btn {
+        background-color: #3085d6;        /* SweetAlert primary blue */
+        color: white;
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .update-btn:hover {
+        background-color: #2563eb;       /* slightly deeper blue */
+        transform: scale(1.03);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .update-btn:active {
+        transform: scale(0.97);
+    }
+
+.update-btn2 {
+        background-color: #f4be0e;        /* SweetAlert primary blue */
+        color: white;
+        padding: 12px 24px;
+        font-size: 16px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .update-btn2:hover {
+        background-color: #2563eb;       /* slightly deeper blue */
+        transform: scale(1.03);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .update-btn2:active {
+        transform: scale(0.97);
+    }
+
 @media (max-width: 768px) {
     .table-section {
-        margin: 0 -20px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
     }
-    
+
     .table-card {
         border-radius: 0;
+        width: 95%; /* Or any width you want on mobile */
+        max-width: 100%;
     }
-    
+
     .stats-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .search-bar {
         width: 200px;
     }

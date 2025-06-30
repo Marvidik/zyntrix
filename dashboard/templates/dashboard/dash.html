@@ -7,18 +7,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="{% static 'dashboard/dash.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/dash.css' %}?v=125"">
+    <!-- Include SweetAlert2 from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 <body>
     <div class="header">
-        <h1> PARKLAND ADMIN DASHBOARD</h1>
+        <div class="user-avatar">Pk</div>
         <div class="header-right">
             <!-- <input type="text" class="search-bar" placeholder="Search"> -->
             <div class="user-profile">
-                <div class="user-avatar">Pk</div>
-                <a href="https://parkland.pythonanywhere.com/admin/">Click Here</a>
-                <span class="user-name">To make changes</span>
+                <button class="update-btn" onclick="updateAccounts()">Update</button>
+               
+               
+                <a href="https://parkland.pythonanywhere.com/admin/"><button class="update-btn2">Main Admin</button></a>
             </div>
         </div>
     </div>
@@ -116,7 +120,7 @@
                             <th>User ID</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Investment</th>
+                            <th>Account Balance</th>
                             <th>Withdrawal</th>
                             <th>Bonus</th>
                             <th>Deposit</th>
@@ -135,7 +139,7 @@
                                 </div>
                             </td>
                             <td>{{ u.email }}</td>
-                            <td class="amount positive">${{ u.investment|intcomma }}</td>
+                            <td class="amount positive">${{ u.account_balance|intcomma }}</td>
                             <td class="amount">${{ u.withdrawal|intcomma }}</td>
                             <td class="amount positive">${{ u.bonus|intcomma }}</td>
                             <td class="amount positive">${{ u.deposit|intcomma }}</td>
@@ -166,6 +170,47 @@
             </div> -->
         </div>
     </div>
+
+    <script>
+    function updateAccounts() {
+        // Show loading
+        Swal.fire({
+            title: 'Updating...',
+            text: 'Please wait while all user accounts are being updated.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        fetch("/update-users/", {
+            method: "GET",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            credentials: "same-origin"
+        })
+        .then(response => response.json())
+        .then(data => {
+            Swal.fire({
+                icon: 'success',
+                title: 'Update Complete',
+                text: data.message,
+                confirmButtonColor: '#3085d6'
+            });
+            location.reload(); 
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Update Failed',
+                text: 'Something went wrong while updating user accounts.',
+                confirmButtonColor: '#d33'
+            });
+            console.error("Error:", error);
+        });
+    }
+</script>
 
    
 </body>

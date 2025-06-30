@@ -7,6 +7,13 @@ from user.models import (
     UserInvestment, Withdrawal, Deposit,
     KYCVerification, ReferalBonus,UserProfile,UserAccount
 )
+from user.utils import update_user_account, process_matured_investments
+from django.contrib.auth import get_user_model
+from django.http import JsonResponse
+from django.contrib.auth.decorators import user_passes_test
+from django.utils.decorators import method_decorator
+from django.views import View
+
 
 @staff_member_required
 def admin_dashboard(request):
@@ -25,7 +32,7 @@ def admin_dashboard(request):
             'name': full_name,
             'initials': initials,
             'email': acc.user.email,
-            'investment': acc.account_balance,
+            'account_balance': acc.account_balance,
             'withdrawal': acc.total_withdrawal,
             'bonus': acc.bonus + acc.referal_bonus,
             'deposit': acc.total_deposit,
@@ -59,3 +66,21 @@ def admin_dashboard(request):
     }
 
     return render(request, "dashboard/dash.html", context)
+
+
+
+
+
+def update_all_user_accounts():
+
+    process_matured_investments()
+    User = get_user_model()
+    for user in User.objects.all():
+        update_user_account(user)
+
+
+@method_decorator(user_passes_test(lambda u: u.is_staff), name='dispatch')
+class UpdateAccountsAjaxView(View):
+    def get(self, request):
+        update_all_user_accounts()
+        return JsonResponse({"message": "All user accounts updated!"})
