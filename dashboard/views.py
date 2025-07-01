@@ -17,6 +17,7 @@ from django.views import View
 
 @staff_member_required
 def admin_dashboard(request):
+    process_matured_investments()
     accounts = UserAccount.objects.select_related("user")
 
     user_data = []
