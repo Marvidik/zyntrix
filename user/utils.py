@@ -251,3 +251,94 @@ def send_withdrawal_mail(email,amount):
     except Exception as e:
         print(f"Error sending welcome email: {str(e)}")
         return False
+
+
+
+
+
+
+def send_Trading_mail(email,amount, plan):
+    try:
+        subject = "Trade"
+        message = format_html("""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+                body {{
+                    background-color: #f0f4f8;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    margin: 0;
+                    padding: 0;
+                }}
+                .container {{
+                    max-width: 600px;
+                    margin: 30px auto;
+                    background-color: #ffffff;
+                    border-radius: 10px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                    overflow: hidden;
+                }}
+                .header {{
+                    background-color: #0051a2;
+                    color: white;
+                    padding: 20px;
+                    text-align: center;
+                }}
+                .content {{
+                    padding: 20px;
+                    color: #333;
+                }}
+                .content h2 {{
+                    color: #0051a2;
+                }}
+                table {{
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }}
+                td {{
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                }}
+                .footer {{
+                    background-color: #f0f4f8;
+                    text-align: center;
+                    padding: 15px;
+                    font-size: 14px;
+                    color: #888;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Trade</h1>
+                </div>
+                <div class="content">
+                    <h2>Hello ,</h2>
+                    <p>You started a <strong>{plan}  Trade</strong> — in your account.</p>
+                    <p>Amount: ${amount}</p>
+                    <p>Your profit for your trade will be calculated and credited to you after 24hrs</p>         
+
+                    <p style="margin-top: 20px;">Please keep your login credentials safe. Our platform will never ask for your password, OTP, or personal codes.</p>
+                    <p>– The Parkland Team</p>
+                </div>
+                <div class="footer">
+                    &copy; 2025 Parkland Oil and Gas. All rights reserved.
+                </div>
+            </div>
+        </body>
+        </html>
+        """, amount=amount, plan= plan)
+
+        from_email = os.getenv('DEFAULT_FROM_EMAIL')
+        recipient_list = [email]
+
+        send_mail(subject, '', from_email, recipient_list, html_message=message, fail_silently=False)
+        return True
+    except Exception as e:
+        print(f"Error Trading email: {str(e)}")
+        return False

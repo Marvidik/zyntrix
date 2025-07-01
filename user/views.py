@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from user.models import UserAccount, Deposit, Profit, Bonus, ReferalBonus,Withdrawal,ReferalList,UserProfile,WithdrawalInfo,OtherSettings,UserInvestment,KYCVerification
-from .utils import update_user_account,send_deposit_mail,process_matured_investments, send_withdrawal_mail
+from .utils import update_user_account,send_deposit_mail,process_matured_investments, send_withdrawal_mail , send_Trading_mail
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.utils.dateparse import parse_date
 from .serializers import WithdrawalInfoSerializer,OtherSettingsSerializer, DepositSerializer, WithdrawalSerializer, UserInvestmentSerializer,UserListInvestmentSerializer, KYCSerializer
@@ -390,6 +390,8 @@ def create_user_investment(request):
         start_date = now()
         end_date = start_date + timedelta(hours=plan.duration)
 
+        email=user.email 
+
         # Save investment
         UserInvestment.objects.create(
             user=user,
@@ -400,6 +402,7 @@ def create_user_investment(request):
             start_date=start_date,
             end_date=end_date
         )
+        send_Trading_mail(email,amount, plan)
 
         return Response({"detail": "Investment created successfully."}, status=status.HTTP_201_CREATED)
 
