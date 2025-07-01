@@ -321,7 +321,7 @@ def send_Trading_mail(email,amount, plan):
                     <h2>Hello ,</h2>
                     <p>You started a <strong>{plan}  Trade</strong> — in your account.</p>
                     <p>Amount: ${amount}</p>
-                    <p>Your profit for your trade will be calculated and credited to you after 24hrs</p>         
+                    <p>Your trade profit  will be calculated and credited to you after 24hrs</p>         
 
                     <p style="margin-top: 20px;">Please keep your login credentials safe. Our platform will never ask for your password, OTP, or personal codes.</p>
                     <p>– The Parkland Team</p>
