@@ -445,7 +445,7 @@ body {
 
     .table-card {
         border-radius: 0;
-        width: 95%; /* Or any width you want on mobile */
+        width: 100%; 
         max-width: 100%;
     }
 
