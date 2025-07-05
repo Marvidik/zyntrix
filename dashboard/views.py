@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from super.models import InvestmentPlan
 from user.models import (
     UserInvestment, Withdrawal, Deposit,
-    KYCVerification, ReferalBonus,UserProfile,UserAccount
+    KYCVerification, ReferalBonus,UserProfile,UserAccount, Profit
 )
 from user.utils import update_user_account, process_matured_investments
 from django.contrib.auth import get_user_model
@@ -35,6 +35,7 @@ def admin_dashboard(request):
             'email': acc.user.email,
             'account_balance': acc.account_balance,
             'withdrawal': acc.total_withdrawal,
+            'profit':acc. total_profit,
             'bonus': acc.bonus + acc.referal_bonus,
             'deposit': acc.total_deposit,
             'kyc': kyc_verified,

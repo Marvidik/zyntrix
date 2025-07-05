@@ -122,6 +122,7 @@
                             <th>Email</th>
                             <th>Account Balance</th>
                             <th>Withdrawal</th>
+                            <th>Profit</th>
                             <th>Bonus</th>
                             <th>Deposit</th>
                             <th>KYC Status</th>
@@ -141,6 +142,7 @@
                             <td>{{ u.email }}</td>
                             <td class="amount positive">${{ u.account_balance|intcomma }}</td>
                             <td class="amount">${{ u.withdrawal|intcomma }}</td>
+                            <td class="amount">${{ u.profit|intcomma }}</td>
                             <td class="amount positive">${{ u.bonus|intcomma }}</td>
                             <td class="amount positive">${{ u.deposit|intcomma }}</td>
                             <td>
