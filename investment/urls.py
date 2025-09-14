@@ -31,6 +31,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('super/', include('super.urls')),
     path('', include('dashboard.urls')),
+    path('administrator/', include('administrator.urls')),
 ]
 
 
