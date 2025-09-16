@@ -106,7 +106,7 @@ class Bonus(models.Model):
 class Penalty(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE)
     amount=models.IntegerField()
-    type=models.CharField(max_length=50,default="bonus")
+    type=models.CharField(max_length=50,default="Penalty")
     reason=models.CharField(max_length=100)
     date=models.DateTimeField(default=now)
 
