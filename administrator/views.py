@@ -37,11 +37,24 @@ def user_list(request):
 def user_detail(request, pk):
     user_profile = get_object_or_404(UserProfile, pk=pk)
     serializer = UserProfileDetailSerializer(user_profile)
+
+    # Get related user object
+    user = user_profile.user
+
+    # Aggregate totals
+    total_deposits = Deposit.objects.filter(user=user).aggregate(total=Sum("amount"))["total"] or 0
+    total_withdrawals = Withdrawal.objects.filter(user=user).aggregate(total=Sum("amount"))["total"] or 0
+
+
     return Response(
         {
             "status": "success",
             "message": f"User {pk} retrieved successfully",
-            "data": serializer.data
+            "data": {
+                **serializer.data,
+                "total_deposits": total_deposits,
+                "total_withdrawals": total_withdrawals,
+            },
         },
         status=status.HTTP_200_OK
     )
