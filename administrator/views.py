@@ -239,6 +239,26 @@ def approve_withdrawal(request, pk):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(["DELETE"])
+@permission_classes([IsAdminUser])
+def delete_withdrawal(request, pk):
+    try:
+        withdrawal = Withdrawal.objects.get(pk=pk)
+        withdrawal.delete()
+        return Response({
+            "status": "success",
+            "message": f"Withdrawal {pk} deleted successfully",
+            "data": None
+        }, status=status.HTTP_200_OK)
+    except Withdrawal.DoesNotExist:
+        return Response({
+            "status": "error",
+            "message": "Withdrawal not found",
+            "data": None
+        }, status=status.HTTP_404_NOT_FOUND)
+
+
+
 @api_view(["GET"])
 @permission_classes([IsAdminUser])
 def list_profits(request):
