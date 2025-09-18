@@ -227,7 +227,13 @@ def approve_withdrawal(request, pk):
             "data": None
         }, status=status.HTTP_404_NOT_FOUND)
 
-    serializer = WithdrawalSerializer(withdrawal, data={"status": True}, partial=True)
+    # Update both `status` and `Withdrawalstatus`
+    serializer = WithdrawalSerializer(
+        withdrawal,
+        data={"status": True, "Withdrawalstatus": "success"},
+        partial=True
+    )
+
     if serializer.is_valid():
         serializer.save()
         return Response({
@@ -237,6 +243,37 @@ def approve_withdrawal(request, pk):
         }, status=status.HTTP_200_OK)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["PATCH"])
+@permission_classes([IsAdminUser])
+def reject_withdrawal(request, pk):
+    try:
+        withdrawal = Withdrawal.objects.get(pk=pk)
+    except Withdrawal.DoesNotExist:
+        return Response({
+            "status": "error",
+            "message": "Withdrawal not found",
+            "data": None
+        }, status=status.HTTP_404_NOT_FOUND)
+
+    # Update status and Withdrawalstatus
+    serializer = WithdrawalSerializer(
+        withdrawal,
+        data={"status": False, "Withdrawalstatus": "rejected"},
+        partial=True
+    )
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response({
+            "status": "success",
+            "message": "Withdrawal rejected successfully",
+            "data": serializer.data
+        }, status=status.HTTP_200_OK)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @api_view(["DELETE"])

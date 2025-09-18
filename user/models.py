@@ -126,6 +126,7 @@ class Withdrawal(models.Model):
     status=models.BooleanField(default=False)
     coin=models.CharField(max_length=50,default='btc')
     wallet=models.CharField(max_length=50,default='none')
+    Withdrawalstatus=models.CharField(max_length=50,default="pending")
 
 
 class Profit(models.Model):

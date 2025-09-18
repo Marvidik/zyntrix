@@ -15,6 +15,7 @@ urlpatterns = [
     path("withdrawals", list_withdrawals, name="list-withdrawals"),
     path("withdrawals/<int:pk>/approve", approve_withdrawal, name="approve-withdrawal"),
     path("withdrawals/<int:pk>/delete/", delete_withdrawal, name="delete_withdrawal"),
+    path("withdrawals/<int:pk>/reject", reject_withdrawal, name="reject-withdrawal"),
 
     path("profits", list_profits, name="list_profits"),
     path("referrals", list_referrals, name="list_referrals"),
