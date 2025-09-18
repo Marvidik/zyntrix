@@ -11,7 +11,7 @@ def update_user_account(user):
     total_deposit = Deposit.objects.filter(user=user, status=True).aggregate(total=Sum('amount'))['total'] or 0
 
     # Aggregate withdrawal
-    total_withdrawal = Withdrawal.objects.filter(user=user).aggregate(total=Sum('amount'))['total'] or 0
+    total_withdrawal = Withdrawal.objects.filter(user=user,status=True).aggregate(total=Sum('amount'))['total'] or 0
 
     # Aggregate bonuses
     bonus = Bonus.objects.filter(user=user).aggregate(total=Sum('amount'))['total'] or 0
